@@ -1,11 +1,12 @@
 package com.midianet.simples.service;
 
-import java.util.List;
 import com.midianet.simples.model.Usuario;
 import com.midianet.simples.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service("userService")
 public class UsuarioService {
