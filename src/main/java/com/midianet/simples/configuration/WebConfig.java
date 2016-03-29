@@ -13,7 +13,8 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @ComponentScan(basePackages = "com.midianet.simples")
 public class WebConfig extends WebMvcConfigurerAdapter{
-	
+
+
 	@Override
 	public void configureViewResolvers(final ViewResolverRegistry registry) {
 		final InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
