@@ -1,6 +1,7 @@
 package com.midianet.simples.controller;
 
-import com.midianet.simples.model.Usuario;
+import com.midianet.simples.mapper.UsuarioMapper;
+import com.midianet.simples.rep.Usuario;
 import com.midianet.simples.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +21,7 @@ public class UsuarioRest {
 
     @RequestMapping(value = "/usuario/", method = RequestMethod.GET)
     public ResponseEntity<List<Usuario>> list() {
-        final List<Usuario> list = service.findAll();
+        final List<Usuario> list = UsuarioMapper.toDTO(service.findAll());
         if(list.isEmpty()){
             return new ResponseEntity(HttpStatus.NO_CONTENT);// HttpStatus.NOT_FOUND
         }
@@ -29,7 +30,7 @@ public class UsuarioRest {
 
     @RequestMapping(value = "/usuario/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Usuario> getUser(@PathVariable("id")final long id) {
-        final Usuario u = service.findById(id);
+        final Usuario u = UsuarioMapper.toDTO(service.findById(id));
         if (u == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
@@ -37,23 +38,25 @@ public class UsuarioRest {
     }
 
     @RequestMapping(value = "/usuario/", method = RequestMethod.POST)
-    public ResponseEntity<Void> create (@RequestBody final Usuario user, final UriComponentsBuilder ucBuilder) {
-        user.setId(null);
-        service.save(user);
+    public ResponseEntity<Void> create (@RequestBody final Usuario usuario, final UriComponentsBuilder ucBuilder) {
+        usuario.setId(null);
+        service.save(UsuarioMapper.toEntity(usuario));
         final HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/usuario/{id}").buildAndExpand(user.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/usuario/{id}").buildAndExpand(usuario.getId()).toUri());
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/usuario/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Usuario> update(@PathVariable("id") final long id, @RequestBody final Usuario user) {
-        final Usuario current = service.findById(id);
+    public ResponseEntity<Usuario> update(@PathVariable("id") final long id, @RequestBody final Usuario usuario) {
+        final Usuario current = UsuarioMapper.toDTO(service.findById(id));
         if (current == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
-        current.setUsername(user.getUsername());
-        current.setAddress(user.getAddress());
-        current.setEmail(user.getEmail());
+        current.setLogin(usuario.getLogin());
+        current.setNome(usuario.getNome());
+        current.setEmail(usuario.getEmail());
+        current.setSenha(usuario.getSenha());
+        current.setAtivo(usuario.isAtivo());
         service.save(current);
         return new ResponseEntity(current, HttpStatus.OK);
     }

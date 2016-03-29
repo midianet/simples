@@ -11,42 +11,42 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Long id;
-	
-	private String username;
-	
-	private String address;
-	
+
+	private String nome;
+
+	private String login;
+
+	private String senha;
+
 	private String email;
+
+	private boolean ativo;
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(final Long id) {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setNome(final String nome) {
+		this.nome = nome;
 	}
 
-	public String getAddress() {
-		return address;
+	public void setSenha(final String senha) {
+		this.senha = senha;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public String getSenha() {
+		return senha;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
+	public void setEmail(final String email) {
 		this.email = email;
 	}
 

@@ -1,5 +1,6 @@
 package com.midianet.simples.rep;
 
+
 public class Usuario {
     private Long id;
     private String nome;
@@ -24,7 +25,15 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public void setSenha(String senha) {
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(final String login) {
+        this.login = login;
+    }
+
+    public void setSenha(final String senha) {
         this.senha = senha;
     }
 
@@ -32,7 +41,20 @@ public class Usuario {
         return senha;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(final boolean ativo) {
+        this.ativo = ativo;
+    }
+
 }

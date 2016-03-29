@@ -5,7 +5,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import javax.servlet.Filter;
 
 public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer {
- 
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[] { WebConfig.class };
@@ -23,7 +23,7 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
     
     @Override
     protected Filter[] getServletFilters() {
-    	final Filter [] singleton = { new BaseFilter() };
+        final Filter [] singleton = { new BaseFilter() };
     	return singleton;
 	}
  
