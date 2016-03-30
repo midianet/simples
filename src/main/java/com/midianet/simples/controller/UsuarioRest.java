@@ -82,10 +82,10 @@ public class UsuarioRest {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Void> create(@Validated @RequestBody final UsuarioDTO usuario, final UriComponentsBuilder ucBuilder) {
         usuario.setId(null);
-        //throw new NegocioException("Falho a validação");
-        service.save(toEntity(usuario));
+        final Usuario u = toEntity(usuario);
+        service.save(u);
         final HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/{id}").buildAndExpand(usuario.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/{id}").buildAndExpand(u.getId()).toUri());
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
 
@@ -109,9 +109,10 @@ public class UsuarioRest {
         final Usuario current = service.findById(id);
         if (current == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }else {
+            service.delete(id);
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        service.delete(id);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
 }
