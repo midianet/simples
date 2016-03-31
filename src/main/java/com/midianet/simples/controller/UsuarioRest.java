@@ -8,10 +8,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,13 +81,17 @@ public class UsuarioRest {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@Validated @RequestBody final UsuarioDTO usuario, final UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> create(@Valid @RequestBody final UsuarioDTO usuario, final BindingResult bindingResults, final UriComponentsBuilder ucBuilder) {
+        if (bindingResults.hasErrors()) {
+
+        }//else {
         usuario.setId(null);
         final Usuario u = toEntity(usuario);
         service.save(u);
         final HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/{id}").buildAndExpand(u.getId()).toUri());
         return new ResponseEntity(headers, HttpStatus.CREATED);
+        //}
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)

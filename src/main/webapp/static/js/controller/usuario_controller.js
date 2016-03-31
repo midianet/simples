@@ -2,7 +2,7 @@
 
 App.controller('UsuarioController', ['$scope', 'UsuarioService', function($scope, UsuarioService) {
     var self = this;
-    self.usuario={id:null,username:'',address:'',email:''};
+    self.usuario = {id: null, nome: '', login: '', senha: '', email: '', ativo: true};
     self.usuarios=[];
 
     self.list = function(){

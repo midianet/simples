@@ -1,12 +1,29 @@
 package com.midianet.simples.rep;
 
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class UsuarioDTO {
     private Long id;
+    @NotNull
+    @Size(min = 5, max = 80)
     private String nome;
+
+    @NotNull
+    @Size(min = 5, max = 20)
     private String login;
+
+    @NotNull
+    @Size(min = 5, max = 10)
     private String senha;
+
+    @NotNull
+    @Size(min = 5, max = 50)
+    @Pattern(regexp = ".+@.+\\.[a-z]+")
     private String email;
+
     private boolean ativo;
 
     public Long getId() {

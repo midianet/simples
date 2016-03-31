@@ -4,13 +4,15 @@
   <head>  
     <title>AngularJS $http Example</title>  
     <style>
-      .username.ng-valid {
+        .nome.ng-valid {
           background-color: lightgreen;
       }
-      .username.ng-dirty.ng-invalid-required {
+
+        .nome.ng-dirty.ng-invalid-required {
           background-color: red;
       }
-      .username.ng-dirty.ng-invalid-minlength {
+
+        .nome.ng-dirty.ng-invalid-minlength {
           background-color: yellow;
       }
 
@@ -39,20 +41,26 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="file">Nome</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.usuario.username" name="uname" class="username form-control input-sm" placeholder="Informe seu nome" required ng-minlength="3"/>
+                                  <input type="text" ng-model="ctrl.usuario.nome" name="nome"
+                                         class="nome form-control input-sm" placeholder="Informe seu nome"/>
+                                  <!-- required ng-minlength="3"-->
                                   <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.uname.$error.required">Campo obrigatório</span>
-                                      <span ng-show="myForm.uname.$error.minlength">Deverá ter no mínimo 3 caracteres</span>
-                                      <span ng-show="myForm.uname.$invalid">Valor inválido</span>
+                                      <span ng-show="myForm.nome.$error.required">Campo obrigatório</span>
+                                      <span ng-show="myForm.nome.$error.minlength">Deverá ter no mínimo 3 caracteres</span>
+                                      <span ng-show="myForm.nome.$invalid">Valor inválido</span>
                                   </div>
                               </div>
                           </div>
                       </div>
                       <div class="row">
                           <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="file">Endereço</label>
+                              <label class="col-md-2 control-lable" for="file">Login</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.usuario.address" class="form-control input-sm" placeholder="Informe seu endereço"/>
+                                  <input type="text" ng-model="ctrl.usuario.login" class="form-control input-sm"
+                                         placeholder="Informe seu endereço"/>
+                                  <span ng-show="myForm.login.$error.required">Campo obrigatório</span>
+                                  <span ng-show="myForm.login.$error.minlength">Deverá ter no mínimo 3 caracteres</span>
+                                  <span ng-show="myForm.login.$invalid">Valor inválido</span>
                               </div>
                           </div>
                       </div>
@@ -88,7 +96,7 @@
                           <tr>
                               <th>Cod.</th>
                               <th>Nome</th>
-                              <th>Endereço</th>
+                              <th>Login</th>
                               <th>Email</th>
                               <th width="20%"></th>
                           </tr>
@@ -96,8 +104,8 @@
                       <tbody>
                           <tr ng-repeat="u in ctrl.usuarios">
                               <td><span ng-bind="u.id"></span></td>
-                              <td><span ng-bind="u.username"></span></td>
-                              <td><span ng-bind="u.address"></span></td>
+                              <td><span ng-bind="u.nome"></span></td>
+                              <td><span ng-bind="u.login"></span></td>
                               <td><span ng-bind="u.email"></span></td>
                               <td>
                               <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
